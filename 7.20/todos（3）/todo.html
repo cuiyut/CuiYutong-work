@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<div class="wrapper">
+            <div class="shang">
+                <img src="./img/1.png" alt="">
+                <img src="./img/2.png" alt="">
+            </div>
+            <div id="need">
+                ~ today I need do ~
+            </div>
+			<div class="add">
+                <input type="text" class="input" value="" placeholder="add need i do" />
+                <button class="tijiao">submit</button>
+			</div>
+			<ul class="todos">
+
+            </ul>
+            <div class="dibu">
+                <span>未完成：<span  class="count"></span></span>
+                <button class="allren">所有任务</button>
+                <button class="yiwc">已完成</button>
+                <button class="weiwc">未完成</button>
+            </div>
+		</div>
+	</body>
+<script type="text/javascript">
+//用户任务输入框
+//获取输入框的input节点
+var input = document.querySelector(".input");
+//获取ul的节点
+var todos = document.querySelector(".todos");
+//未完成
+var count = document.querySelector(".count");
+//所有任务
+var allren = document.querySelector(".allren"); 
+//已完成
+var yiwc = document.querySelector(".yiwc"); 
+//未完成
+var weiwc = document.querySelector(".weiwc"); 
+// 提交按钮
+var tijiao = document.querySelector('.tijiao')
+//用来计算输入的任务
+var nextId;
+		
+
+
+//添加封装
+function add(){
+	//taskStr就是本地存储localStorage.taskList的值
+	var taskStr=localStorage.taskList;
+	//将数据转换为json对象
+	var taskArr=taskStr==undefined?[]:JSON.parse(taskStr);
+	nextId=localStorage.nextId==undefined?-1:localStorage.nextId;
+	//获取用户输入的任务并创建对象
+	var obj={
+		"nextId":++nextId,
+		"name":`${input.value}`,
+		"status":false		//true:已完成 false:未完成
+	}
+	//向数组添加
+	taskArr.push(obj); 
+	//转换成字符串
+	localStorage.taskList=JSON.stringify(taskArr);
+	localStorage.nextId=nextId;
+    // 清空
+    input.value = ''
+	//渲染页面
+	loadlist();
+}
+
+
+
+loadlist();
+//渲染页面封装
+function loadlist(){
+// 每次添加之后再次添加渲染页面要清空
+	todos.innerHTML="";
+	// 1.从localstorage中读出数据
+	var taskStr=localStorage.taskList;
+	var taskArr=taskStr==undefined?[]:JSON.parse(taskStr);
+	//2.创建li节点
+	taskArr.forEach(function(obj){
+		// createElement:创建节点
+		var li = document.createElement("li")
+		li.innerHTML=`
+		<input type="checkbox" />
+		<span>${obj.name}</span>
+		<a href="javascript:void(0);" class="dell">X</a>
+		`
+	//向ul中插入li
+	//li插入到todos子节点上面
+	todos.insertBefore(li,todos.firstChild)
+	})
+	//渲染
+	load();
+}
+
+
+
+//回车添加
+input.onkeydown=function(event){
+	if(event.keyCode==13){
+		add();
+	}
+}
+
+
+
+
+// 按钮添加
+tijiao.onclick = function() {
+    add()
+}
+
+
+
+load();
+// 渲染数据
+function load(state){
+	todos.innerHTML="";
+	//从本地存储取数据
+	var taskStr = localStorage.taskList;
+	var taskArr = taskStr == undefined ? [] : JSON.parse(taskStr);
+	var total=taskArr.length; //总任务数量
+	//筛选出未完成
+	var noTask=taskArr.filter(function(obj){
+		return obj.status==false;
+	})
+	var noTaskNum = noTask.length;	//未完成数量
+	count.innerHTML=`${noTaskNum}/${total}`;	//更新任务数
+	//遍历
+	taskArr.forEach(function(obj,index){
+		var li = document.createElement("li");
+		//渲染符合状态的数据
+		if(obj.status==state){
+			li.innerHTML=`<input type="checkbox" ${obj.status==true?'checked':''} value="${obj.nextId}" />
+					<span class=${obj.status==true?'del':''}>${obj.name}</span>
+					<a href="javascript:void(0);" class="dell">X</a>`;
+			todos.insertBefore(li,todos.firstElementChild);
+		}else if(state==undefined){
+			li.innerHTML=`<input type="checkbox" ${obj.status==true?'checked':''} value="${obj.nextId}" />
+					<span class=${obj.status==true?'del':''}>${obj.name}</span>
+					<a href="javascript:void(0);" class="dell">X</a>`;
+			todos.insertBefore(li,todos.firstElementChild);
+		}
+	})
+}
+
+
+
+
+var flag;
+//点击所有任务
+allren.onclick=function(){
+	load();
+	flag=undefined;
+}
+//点击已完成的任务
+yiwc.onclick=function(){
+	load(true);
+	flag=true;
+}
+//点击未完成的任务
+weiwc.onclick=function(){
+	load(false);
+	flag=false;
+}
+		
+
+
+
+//点击修改完成状态	利用事件委托
+todos.onclick=function(event){
+	var taskStr=localStorage.taskList;
+	var taskArr=taskStr==undefined?[]:JSON.parse(taskStr);
+	var target=event.target||event.srcElement;
+	//获取事件对象
+	if(target.nodeName=="INPUT"){
+		//获取复选框的状态
+		var status=target.checked;
+		// 如果复选框被选中则添加删除线
+		if(status){
+			//获取兄弟元素节点	给兄弟节点增加一个del类名
+			target.nextElementSibling.className="del"
+		}else{
+			target.nextElementSibling.className=""
+		}
+		//修改点击的数据对应的状态
+		var nextId=target.value;
+		//根据indexId查询对应的obj
+		var obj=taskArr.find(function(obj){
+			return obj.nextId==nextId;
+		})
+		//改变状态
+		obj.status=status;
+	}else if(target.nodeName=="A"){
+		//获取自定义属性值
+		var index=target.dataset.index;
+		taskArr.splice(index,1);
+	}
+	//更新本地存储
+	localStorage.taskList=JSON.stringify(taskArr);
+	//重新渲染,需要判断当前点击的是哪个
+	load(flag);
+}
+	</script>
+</html>
+
+<style>
+    * {
+        text-decoration: none;
+    }
+    body {
+        background: rgb(170, 134, 134);
+    }
+    .wrapper {
+        margin: auto;
+        margin-top: 150px;
+        width: 400px;
+        border-radius: 10px;
+        background: white;
+    }
+    .shang {
+        width: 100%;
+        box-sizing: border-box;
+        padding-top: 20px;
+        padding-left: 50px;
+    }
+    #need {
+        font-size: 25px;
+        font-weight: 700;
+        text-align: center;
+        width: 100%;
+        height: 50px;
+        line-height: 50px;
+    }
+    .add {
+        width: 100%;
+        height: 80px;
+        line-height: 80px;
+        text-align: center;
+    }
+    input {
+        border: none;
+        outline: none;
+        border-bottom: 5px dashed orange;
+    }
+    .tijiao {
+        height: 30px;
+        border: 2px solid black;
+        margin-left: 20px;
+        background: white;
+        border-radius: 5px;
+    }
+    .dibu {
+        width: 100%;
+        height: 50px;
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+    }
+    .del{
+		text-decoration: line-through;
+        background: skyblue;
+	}
+    .dell {
+        float: right;
+        color: red;
+        margin-right: 15px;
+		cursor: pointer;
+    }
+    li:hover {
+        background: wheat;
+        color: white;
+    }
+    .yiwc,.weiwc,.allren {
+		height: 30px;
+		line-height: 25px;
+		border-radius: 5px;
+        border: 1px solid grey;
+		color: grey;
+		background: white;
+		cursor: pointer;
+    }
+</style>
