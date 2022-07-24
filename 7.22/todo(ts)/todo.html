@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./todo.css">
+</head>
+<body>
+    <div class="wrapper">
+        <div id="need">
+            ~ today I need do ~
+        </div>
+        <div class="add">
+            <input type="text" class="input" value="" placeholder="add need i do" onkeydown="addTodo(event)" />
+            <button class="tijiao" onclick="addTodo()">submit</button>
+        </div>
+        <ul>
+
+        </ul>
+        <div class="dibu">
+            总条数：<span  class="count"></span>
+            <button id="allren">所有任务</button>
+            <button id="yiwc">已完成</button>
+            <button id="weiwc">未完成</button>
+            <button id="qing" onclick="qingAll()">清空</button>
+        </div>
+    </div>
+</body>
+<script src="./todo.js"></script>
+</html>
