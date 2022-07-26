@@ -107,9 +107,12 @@
     }
     // 选中出现删除线并改变背景颜色
     todos.onclick = function(e) {
-        if(e.target.className == "xuan") {
+        if(e.target.checked == true) {
             e.target.parentNode.style.textDecoration = "line-through"
             e.target.parentNode.style.backgroundColor = 'skyblue'
+        }else {
+            e.target.parentNode.style.textDecoration = ""
+            e.target.parentNode.style.backgroundColor = ''
         }
     }
 </script>

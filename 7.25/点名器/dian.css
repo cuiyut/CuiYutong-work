@@ -1,0 +1,24 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+.wrapper {
+    width: 1300px;
+    height: 900px;
+    background: linear-gradient(rgb(115, 198, 247),skyblue);
+    box-sizing: border-box;
+    padding-top: 20px;
+}
+.btn {
+    display: flex;
+    justify-content: space-around;
+}
+.one,.two {
+    width: 200px;
+    height: 50px;
+    text-align: center;
+    line-height: 50px;
+    font-size: 30px;
+    color: white;
+    background: brown;
+}

@@ -177,5 +177,3 @@ alltype = 1
 alltype = 'ddd'
 // 不能将类型“boolean”分配给类型“string | number”
 // alltype = false
-
-
