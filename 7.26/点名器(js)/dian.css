@@ -1,0 +1,40 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+.wrapper {
+    width: 1300px;
+    height: 750px;
+    background: linear-gradient(rgb(115, 198, 247),skyblue);
+    box-sizing: border-box;
+    padding-top: 100px;
+}
+.btn {
+    display: flex;
+    justify-content: space-around;
+}
+.one,.two {
+    width: 200px;
+    height: 50px;
+    text-align: center;
+    line-height: 45px;
+    font-size: 25px;
+    color: white;
+    background: brown;
+    border: 3px dashed white;
+    border-radius: 15px;
+    cursor: pointer;
+}
+.ming {
+    border: 5px dashed white;
+    width: 650px;
+    height: 320px;
+    margin: auto;
+    margin-top: 100px;
+    border-radius: 6%;
+    box-sizing: border-box;
+    text-align: center;
+    line-height: 300px;
+    font-size: 55px;
+    color: rgb(190, 81, 81);
+}

@@ -1,0 +1,20 @@
+{
+  // 设置为true的话，编辑器会根据tsconfig.json的配置重新生成文件
+  "compileOnSave": true,
+  // 在编译时只编译包含在files中的文件
+  "files": ["./src"],
+  // 可以指定编译的路径
+  "include": ["./src/**/*"],
+  // 除了这个指定的文件外都编译
+  "exclude": ["./src/one"],
+  "compilerOptions": {
+    // 编译的版本目标
+    "target": "ES6",
+    // 用于指定要包含在编译中的库文件
+    "lib": [],
+    // 表示的是输出的文件，编译后文件存放的位置
+    "outDir": "",
+    // true，注释就会被移除
+    "removeComments": false
+  }
+}
