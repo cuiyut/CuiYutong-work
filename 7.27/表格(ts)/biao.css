@@ -1,0 +1,19 @@
+body {
+    text-align: center;
+}
+
+table {
+    margin: auto;
+    margin-top: 20px;
+    width: 100%;
+}
+
+th {
+    text-align: center;
+    padding: 5px 100px;
+    background: gray;
+}
+
+td {
+    text-align: center;
+}
