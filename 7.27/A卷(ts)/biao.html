@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./biao.css">
+</head>
+<body>
+    <div class="wrapper">
+        <div class="input">
+          <input type="text" class="sou" onkeydown="sou(this)">
+        </div>
+        <div class="biao">
+          <table>
+            <thead>
+                <tr bgcolor="grey">
+                    <td class="id">
+                      编号
+                      <div class="xia-wrapper" onclick="idxu(this)">
+                        ↓
+                      </div>
+                      <!-- <div class="shang-wrapper">
+                        ↑
+                      </div> -->
+                    </td>
+                    <td class="name">名称</td>
+                    <td class="price">
+                      价格
+                      <div class="shang-jia" onclick="prixu(this)"></div>
+                      <!-- <div class="xia-jia"></div> -->
+                    </td>
+                  </tr>
+            </thead>
+
+            <tbody>
+                <!-- <tr v-for="item in list" :key='item.id'>
+                    <td>{{item.id}}</td>
+                    <td>{{item.goods_name}}</td>
+                    <td>{{item.price}}</td>
+                </tr> -->
+            </tbody>
+          </table>
+        </div>
+        <div class="dibu">
+          <div class="zuo">
+            每页<input type="text" class="ye" onkeydown="pnum(this)">条，
+            共<span>0</span>条
+          </div>
+          <span id="fanye-wrapper">
+              <!-- <p class="fanye"></p> -->
+              <!-- <p v-for="(item, index) in arr" :key="index" @click="fan(item)">
+                  {{item}}
+              </p> -->
+          </span>
+        </div>
+      </div>
+</body>
+<script src="./biao.js"></script>
+</html>

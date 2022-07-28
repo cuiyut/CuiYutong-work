@@ -1,0 +1,93 @@
+.xia-wrapper {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    border: 2px solid red;
+    box-sizing: border-box;
+    background: white;
+    color: red;
+    font-size: 20px;
+    font-weight: 800px;
+    text-align: center;
+    line-height: 25px;
+    float: right;
+    cursor: pointer;
+}
+.shang-wrapper {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    border: 2px solid red;
+    box-sizing: border-box;
+    background: white;
+    color: red;
+    font-size: 20px;
+    text-align: center;
+    line-height: 25px;
+    float: right;
+    cursor: pointer;
+}
+table {
+  margin-top: 10px;
+  width: 100%;
+  text-align: center;
+}
+.dibu {
+  margin-top: 10px;
+  display: flex;
+  justify-content: space-between;
+}
+.ye {
+  width: 25px;
+}
+.id {
+  width: 250px;
+  box-sizing: border-box;
+  padding-right: 20px;
+}
+.price {
+  width: 350px;
+  box-sizing: border-box;
+  padding-right: 70px;
+}
+.shang-jia {
+  width: 30px;
+  height: 30px;
+  border: 3px solid white;
+  border-top: white;
+  border-left: white;
+  box-sizing: border-box;
+  transform: rotate(42deg);
+  float: right;
+  margin-top: -10px;
+  margin-bottom: 10px;
+  margin-right: 20px;
+  cursor: pointer;
+}
+.xia-jia {
+  width: 30px;
+  height: 30px;
+  border: 3px solid white;
+  border-top: white;
+  border-left: white;
+  box-sizing: border-box;
+  transform: rotate(220deg);
+  float: right;
+  margin-top: 10px;
+  margin-bottom: -10px;
+  margin-right: 20px;
+  cursor: pointer;
+}
+#fanye-wrapper {
+  width: 200px;
+  height: 30px;
+  display: flex;
+  margin-top: -15px;
+}
+p {
+  width: 30px;
+  height: 30px;
+  border: 1px solid skyblue;
+  text-align: center;
+  line-height: 30px;
+}
