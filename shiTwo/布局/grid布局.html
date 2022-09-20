@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .main {
+            width: 300px;
+            height: 300px;
+            background: red;
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr 1fr;
+            grid-template-rows: 1fr 1fr;
+            grid-template-areas: 
+            "a1 a1 a2"
+            "a1 a1 a2"
+        }
+        .main div {
+            background: skyblue;
+            border: 1px solid pink;
+        }
+        .main div:nth-of-type(1) {
+            grid-area: a1;
+        }
+        /* .main div:nth-of-type(3) {
+            grid-area: a2;
+        } */
+    </style>
+</head>
+<body>
+    <div class="main">
+        <div>1(a1)</div>
+        <div>2(a1)</div>
+        <div>3(a2)</div>
+        <div>4(a1)</div>
+        <div>5(a1)</div>
+        <div>6(a2)</div>
+    </div>
+</body>
+</html>
