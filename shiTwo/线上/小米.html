@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="box">
+        <div class="left">
+            <ul>
+                <li>手机电话卡 <span class="spn"></span>
+                    <div class="content">
+                        <div>
+                            <img src="./img/2.jpg"> <span>小米Mlx FOLD 1</span>
+                        </div>
+                        <div>
+                            <img src="./img/2.jpg"> <span>小米Mlx FOLD
+                                1</span>
+                        </div>
+                        <div>
+                            <img src="./img/2.jpg"> <span>小米Mlx FOLD
+                                1</span>
+                        </div>
+                        <div>
+                            <img src="./img/2.jpg"> <span>小米Mlx FOLD
+                                1</span>
+                        </div>
+                        <div>
+                            <img src="./img/2.jpg"> <span>小米Mlx FOLD
+                                1</span>
+                        </div>
+                        <div>
+                            <img src="./img/2.jpg"> <span>小米Mlx FOLD
+                                1</span>
+                        </div>
+                    </div>
+                </li>
+                <li>笔记本 显示器 平板 <span class="spn"></span>
+                    <div class="content">
+                        <div>
+                            <img src="./img/2.jpg"> <span>小米Mlx FOLD
+                                2</span>
+                        </div>
+                        <div>
+                            <img src="./img/2.jpg"> <span>小米Mlx FOLD
+                                2</span>
+                        </div>
+                        <div>
+                            <img src="./img/2.jpg"> <span>小米Mlx FOLD
+                                2</span>
+                        </div>
+                        <div>
+                            <img src="./img/2.jpg"> <span>小米Mlx FOLD
+                                2</span>
+                        </div>
+                    </div>
+                </li>
+                <li>手机电话卡 <span class="spn"></span>
+                    <div class="content">
+                        <div>
+                            <img src="./img/2.jpg"> <span>小米Mlx FOLD
+                                3</span>
+                        </div>
+                        <div>
+                            <img src="./img/2.jpg"> <span>小米Mlx FOLD
+                                3</span>
+                        </div>
+                        <div>
+                            <img src="./img/2.jpg"> <span>小米Mlx FOLD
+                                3</span>
+                        </div>
+                        <div>
+                            <img src="./img/2.jpg"> <span>小米Mlx FOLD
+                                3</span>
+                        </div>
+                    </div>
+                </li>
+                <li>笔记本 显示器 平板 <span class="spn"></span>
+                    <div class="content">
+                        <div>
+                            <img src="./img/2.jpg"> <span>小米Mlx FOLD
+                                4</span>
+                        </div>
+                        <div>
+                            <img src="./img/2.jpg"> <span>小米Mlx FOLD
+                                4</span>
+                        </div>
+                        <div>
+                            <img src="./img/2.jpg"> <span>小米Mlx FOLD
+                                4</span>
+                        </div>
+                        <div>
+                            <img src="./img/2.jpg"> <span>小米Mlx FOLD
+                                4</span>
+                        </div>
+                    </div>
+                </li>
+                <li>手机电话卡 <span class="spn"></span>
+                    <div class="content">
+                        <div>
+                            <img src="./img/2.jpg"> <span>小米Mlx FOLD
+                                5</span>
+                        </div>
+                        <div>
+                            <img src="./img/2.jpg"> <span>小米Mlx FOLD
+                                5</span>
+                        </div>
+                        <div>
+                            <img src="./img/2.jpg"> <span>小米Mlx FOLD
+                                5</span>
+                        </div>
+                        <div>
+                            <img src="./img/2.jpg"> <span>小米Mlx FOLD
+                                5</span>
+                        </div>
+                    </div>
+                </li>
+                <li>笔记本 显示器 平板 <span class="spn"></span>
+                    <div class="content">
+                        <div>
+                            <img src="./img/2.jpg"> <span>小米Mlx FOLD
+                                6</span>
+                        </div>
+                        <div>
+                            <img src="./img/2.jpg"> <span>小米Mlx FOLD
+                                6</span>
+                        </div>
+                        <div>
+                            <img src="./img/2.jpg"> <span>小米Mlx FOLD
+                                6</span>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <div class="right"></div>
+    </div>
+</body>
+<script>
+    var li = document.querySelectorAll('li')
+    var content = document.querySelectorAll('.content')
+    console.log(content);
+    for (let i = 0; i < li.length; i++) {
+        li[i].onmouseover = function () {
+            for (let j = 0; j < li.length; j++) {
+                li[j].classList.remove('bgc')
+                content[j].style = 'display: none'
+            }
+            content[i].style = 'display: block'
+            this.classList.add('bgc')
+        }
+        li[i].onmouseout = function () {
+            content[i].style = 'display: none'
+            this.classList.remove('bgc')
+        }
+    }
+</script>
+<style>
+    .content {
+        position: absolute;
+        left: 200px;
+        top: 0;
+        color: #000;
+        width: 300px;
+        display: none;
+        background-color: #fff;
+    }
+
+    .content div {
+        margin: 20px 20px;
+        width: 50%;
+        float: left;
+    }
+
+    .content img {
+        width: 30px;
+        height: 40px;
+        vertical-align: middle;
+    }
+
+    .bgc {
+        background-color: #ff6801;
+    }
+
+    .left ul {
+        width: 100%;
+        margin: 20px 0;
+    }
+
+    .left ul li {
+        width: 100%;
+        padding: 15px 20px;
+        color: #fff;
+        font-size: 14px;
+        position: relative;
+    }
+
+    .left ul li .spn {
+        position: absolute;
+        display: inline-block;
+        width: 8px;
+        height: 8px;
+        border: 1px solid;
+        border-color: transparent transparent #fff #fff;
+        transform: rotate(225deg);
+        right: 10px;
+        top: 20px;
+
+    }
+
+    .box {
+        display: flex;
+    }
+
+    .left {
+        width: 25%;
+        height: 100vh;
+        background-color: #7b7b7b;
+    }
+
+    .right {
+        width: 65%;
+        background-color: rgba(204, 204, 204, 0.205);
+    }
+
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+</style>
+
+</html>

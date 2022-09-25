@@ -1,13 +1,12 @@
 <template>
   <view class="content">
     <view class="top" :style="'background:linear-gradient(' + data.bgColor + ',white)'">
-      <search></search>
       <!-- 轮播 -->
       <view class="uni-margin-wrap">
         <swiper class="swiper" circular indicator-dots="true" autoplay="true" interval="5000" duration="500" @change="changeBG">
           <swiper-item v-for="item in data.swiperData" :key="item.id">
             <view class="swiper-item">
-              <img :src="'http://m.mengxuegu.com'+item.imageUrl" :alt="item.title">
+              <img :src=" item.imageUrl" :alt="item.title">
             </view>
           </swiper-item>
         </swiper>
@@ -21,31 +20,17 @@
       </view>
     </view>
     
-    <!-- 热门推荐 -->
-    <view class="hot">
-      <view class="hot-top">
-        <span>热门推荐</span>
-        <p>HOT</p>
-        <span class="all">全部></span>
-      </view>
-      <view class="hot-bottom">
-        <view class="hot-item">
-          
-        </view>
-      </view>
-    </view>
+    <indexAll :data="data.hotData" title="热门推荐" red="HOT"></indexAll>
+    <indexAll :data="data.newData" title="近期上新" red="NEW"></indexAll>
+    <indexAll :data="data.freeData" title="免费精选" red="FREE"></indexAll>
+    <indexAll :data="data.nofreeData" title="付费精品" red="NICE"></indexAll>
     
-    <!-- 近期上新 -->
-    
-    <!-- 免费精选 -->
-    
-    <!-- 付费精品 -->
   </view>
 </template>
 
 <script setup>
-  import search from "/components/search/search.vue"
-  import { getSwiper,getFen,getHot,getNew,getFree,getnoFree } from "../../api/index.js"
+  import { getSwiper,getFen,getHot,getNew,getFree,getNofree } from "../../api/index.js"
+  import indexAll from "/components/index/indexAll.vue"
   import { reactive } from 'vue'
   const data = reactive({
     // 轮播图
@@ -84,15 +69,28 @@
   }
   
   // 热门推荐
-  getHot().then(res => {
-    console.log(res);
+  getHot({ sort: "hot", current: 1, size: 10}).then(res => {
+    // console.log(res,'hot');
+    data.hotData = res.data.data.records
   })
   
   // 近期上新
+  getNew({ sort: "new", current: 1, size: 10}).then(res => {
+    // console.log(res,'new');
+    data.newData = res.data.data.records
+  })
   
   // 免费精选
+  getFree({ isFree: 1, current: 1, size: 10}).then(res => {
+    // console.log(res,'free');
+    data.freeData = res.data.data.records
+  })
   
   // 付费精品
+  getNofree({ isFree: 0, current: 1, size: 10}).then(res => {
+    // console.log(res,'nofree');
+    data.nofreeData = res.data.data.records
+  })
 </script>
 
 <style lang="scss">
@@ -100,7 +98,7 @@
     width: 100%;
     .top {
       width: 100%;
-      height: 440rpx;
+      height: 360rpx;
       background: linear-gradient(#006C00,white);
       .uni-margin-wrap {
         width: 100%;
@@ -142,35 +140,6 @@
         text-align: center;
         font-size: 16rpx;
         border-radius: 20rpx;
-      }
-    }
-    .hot {
-      width: 100%;
-      .hot-top {
-        width: 100%;
-        height: 80rpx;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        box-sizing: border-box;
-        margin-top: 10rpx;
-        padding: 0 5%;
-        font-size: 35rpx;
-        p {
-          width: 70rpx;
-          height: 30rpx;
-          background: linear-gradient(to right,orange,red);
-          font-size: 12rpx;
-          color: white;
-          text-align: center;
-          line-height: 30rpx;
-          border-radius: 15rpx 15rpx 15rpx 0;
-          margin-left: -350rpx;
-        }
-        .all {
-          font-size: 14px;
-          color: #959da5;
-        }
       }
     }
   }

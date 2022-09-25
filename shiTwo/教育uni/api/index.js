@@ -12,27 +12,21 @@ const getFen = () => {
   return data
 }
 
-// 热门推荐
-const getHot = () => {
-  let data = axios.get('course/api/course/search')
+// 热门推荐、近期上新、免费精选、付费精品
+const getHot = (obj) => {
+  let data = axios.post('course/api/course/search',obj)
   return data
 }
-
-// 近期上新
-const getNew = () => {
-  let data = axios.get('course/api/course/search')
+const getNew = (obj) => {
+  let data = axios.post('course/api/course/search',obj)
   return data
 }
-
-// 免费精选
-const getFree = () => {
-  let data = axios.get('course/api/course/search')
+const getFree = (obj) => {
+  let data = axios.post('course/api/course/search',obj)
   return data
 }
-
-// 付费精品
-const getnoFree = () => {
-  let data = axios.get('course/api/course/search')
+const getNofree = (obj) => {
+  let data = axios.post('course/api/course/search',obj)
   return data
 }
 
@@ -43,5 +37,5 @@ export {
   getHot,
   getNew,
   getFree,
-  getnoFree
+  getNofree
 }
