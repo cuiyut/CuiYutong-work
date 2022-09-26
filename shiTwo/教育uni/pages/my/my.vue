@@ -1,42 +1,62 @@
 <template>
 	<view class="top">
-		<div class="header-cnt" @click="login">
-			<div class="left">
+		<view class="topp" @click="login">
+			<view class="left">
 				<img src="http://m.mengxuegu.com/static/logo.png">
 				<p>请登录</p>
-			</div>
-			<div class="iconfont icon-right right"></div>
-		</div>
+			</view>
+      <view class="right">
+        <i class="iconfont icon-right"></i>
+      </view>
+		</view>
 	</view>
 
-	<div class="list">
-		<div class="list-item">
-			<div class="left">我的订单</div>
-			<div class="iconfont icon-right right"></div>
-		</div>
-		<div class="list-item">
-			<div class="left">我的余额</div>
-			<div class="iconfont icon-right right"></div>
-		</div>
-		<div class="list-item">
-			<div class="left">我的学习</div>
-			<div class="iconfont icon-right right"></div>
-		</div>
-	</div>
-	<div class="list">
-		<div class="list-item">
-			<div class="left">设置</div>
-			<div class="iconfont icon-right right"></div>
-		</div>
-		<div class="list-item">
-			<div class="left">意见反馈</div>
-			<div class="iconfont icon-right right"></div>
-		</div>
-	</div>
-	<div class="about">
-		<div class="left">关于我们</div>
-		<div class="iconfont icon-right right"></div>
-	</div>
+	<view class="list">
+		<view class="list-item">
+			<view class="left">
+        <i class="color iconfont icon-icon_A"></i>
+        我的订单
+      </view>
+      <view class="right"><i class="iconfont icon-right"></i></view>
+		</view>
+		<view class="list-item">
+			<view class="left">
+        <i class="color iconfont icon-Package"></i>
+        我的余额
+      </view>
+      <view class="right"><i class="iconfont icon-right"></i></view>
+		</view>
+		<view class="list-item">
+			<view class="left">
+        <i class="color iconfont icon-shuben"></i>
+        我的学习
+      </view>
+      <view class="right"><i class="iconfont icon-right"></i></view>
+		</view>
+	</view>
+	<view class="list">
+		<view class="list-item">
+			<view class="left">
+        <i class="color iconfont icon-icon_A2"></i>
+        设置
+      </view>
+      <view class="right"><i class="iconfont icon-right"></i></view>
+		</view>
+		<view class="list-item">
+			<view class="left">
+        <i class="color iconfont icon-icon_A1"></i>
+        意见反馈
+      </view>
+      <view class="right"><i class="iconfont icon-right"></i></view>
+		</view>
+	</view>
+	<view class="about">
+		<view class="left">
+      <i class="color iconfont icon-icon_A3"></i>
+      关于我们
+    </view>
+    <view class="right"><i class="iconfont icon-right"></i></view>
+	</view>
 </template>
 
 <script setup>
@@ -74,16 +94,16 @@
 			border-bottom: 0.5px solid #efeff4;
 		}
 	}
-
-	.right {
-		font-size: 17px;
-		color: #959da5;
-	}
+  .color {
+    color: #345dc2;
+    font-size: 20px;
+    font-weight: 900;
+  }
 
 	.top {
 		background-color: #345dc2;
 
-		.header-cnt {
+		.topp {
 			width: 100%;
 			padding: 25px 19px;
 			background-color: #fff;
@@ -93,14 +113,11 @@
 			box-sizing: border-box;
 			align-items: center;
 			border-bottom: 10px solid #f8f9fb;
-
 			.left {
 				display: flex;
 				align-items: center;
 				font-size: 19px;
 				font-weight: 700;
-
-
 				img {
 					width: 140rpx;
 					margin-right: 10px;

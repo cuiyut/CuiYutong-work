@@ -3,25 +3,98 @@
 		{
 			"path": "pages/index/index",
 			"style": {
-				"navigationStyle": "custom"
+        "enablePullDownRefresh": false,
+        "navigationBarBackgroundColor": "#345DC2",
+        "app-plus": {
+          "bounce": "none",
+          "titleNView": {
+            "searchInput": {
+              "align": "center",
+              "borderRadius": "20px",
+              "placeholder": "搜索你想要的内容",
+              "placeholderColor": "#ccc",
+              "backgroundColor": "#fff",
+              "disabled": true
+            }
+          }
+        }
 			}
 		},
 		{
 			"path": "pages/category/category",
-			"style": {}
+			"style": {
+        "navigationBarTitleText": "分类",
+        "enablePullDownRefresh": false,
+        "navigationBarBackgroundColor": "#345DC2",
+        "navigationBarTextStyle": "white",
+        "app-plus": {
+          "bounce": "none",
+          "titleNView": {
+            "buttons": [
+              {
+                "float": "right",
+                "fontSize": "18",
+                "fontSrc": "/static/icon/iconfont.ttf",
+                "text": "\ue608"
+              }
+            ]
+          }
+        }
+      }
 		},
 		{
 			"path": "pages/article/article",
-			"style": {}
+			"style": {
+        "enablePullDownRefresh": false,
+        "navigationBarBackgroundColor": "#345DC2",
+        "app-plus": {
+          "bounce": "none",
+          "titleNView": {
+            "searchInput": {
+              "align": "center",
+              "borderRadius": "20px",
+              "placeholder": "搜索你想要的内容",
+              "placeholderColor": "#ccc",
+              "backgroundColor": "#fff",
+              "disabled": true
+            }
+          }
+        }
+      }
 		},
 		{
 			"path": "pages/question/question",
-			"style": {}
+			"style": {
+        "enablePullDownRefresh": false,
+        "navigationBarBackgroundColor": "#345DC2",
+        "app-plus": {
+          "bounce": "none",
+          "titleNView": {
+            "searchInput": {
+              "align": "center",
+              "borderRadius": "20px",
+              "placeholder": "搜索你想要的内容",
+              "placeholderColor": "#ccc",
+              "backgroundColor": "#fff",
+              "disabled": true
+            }
+          }
+        }
+      }
 		},
 		{
 			"path": "pages/my/my",
-			"style": {}
-		}
+			"style": {
+        "enablePullDownRefresh": false,
+        "navigationBarBackgroundColor": "#345DC2"
+      }
+		},
+    {
+    	"path": "pages/login/login",
+    	"style": {
+        "navigationStyle": "custom"
+      }
+    }
 	],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
