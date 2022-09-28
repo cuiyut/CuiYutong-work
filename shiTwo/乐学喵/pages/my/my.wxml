@@ -1,0 +1,63 @@
+<view class="zbox">
+    <view class="header">
+        <image src="/static/tabbar/7.png"></image>
+        <view class="loginmbile">
+            <image class="loginimgs" src="/static/tabbar/1.png"></image>
+            <view>登录/注册</view>
+        </view>
+        <image class="shezhi" src="/static/tabbar/6.png"></image>
+    </view>
+    <view class="mbile">
+        <li>
+            <image src="/static/tabbar/13.png"></image>
+            <view>我的订单</view>
+            <view>买课发快递</view>
+        </li>
+        <li>
+            <image src="/static/tabbar/11.png"></image>
+            <view>兑换课程</view>
+            <view>兑换码兑换课程</view>
+        </li>
+        <li>
+            <image src="/static/tabbar/10.png"></image>
+            <view>地址管理</view>
+            <view>收货地址</view>
+        </li>
+
+    </view>
+
+
+    <!-- 我的收藏 -->
+    <view class="shoucang">
+       <li>
+          <image src="/static/tabbar/15.png"></image>
+          <p>我的收藏</p>
+          <image src="/static/tabbar/22.png"></image>
+       </li>
+       <li>
+          <image src="/static/tabbar/14.png"></image>
+          <p>我的会员</p>
+          <image src="/static/tabbar/22.png"></image>
+       </li>
+       <li>
+          <image src="/static/tabbar/17.png"></image>
+          <p>我的优惠券</p>
+          <image src="/static/tabbar/22.png"></image>
+       </li>
+      
+    </view>
+    <view class="shoucang">
+       <li>
+          <image src="/static/tabbar/16.png"></image>
+          <p>我的消息</p>
+          <image src="/static/tabbar/22.png"></image>
+       </li>
+       <li>
+          <image src="/static/tabbar/12.png"></image>
+          <p>问题反馈</p>
+          <image src="/static/tabbar/22.png"></image>
+       </li>
+      
+    </view>
+
+</view>
