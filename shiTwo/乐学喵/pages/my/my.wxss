@@ -6,6 +6,7 @@
 
 .zbox .header {
   position: relative;
+  background-color: white;
 }
 
 .zbox .header image {
@@ -39,74 +40,112 @@
   width: 40rpx;
   height: 40rpx;
   position: absolute;
-  right: 40rpx;
+  right: 20rpx;
   top: 40rpx;
 }
 
 .zbox .mbile {
   width: 100%;
-  height: 90px;
+  height: 180rpx;
   background-color: white;
   display: flex;
-  margin-top: 10px;
+  padding-top: 20rpx;
 }
 
 .zbox .mbile li {
   width: 33%;
-  height: 90px;
+  height: 140rpx;
   text-align: center;
 }
 
 .zbox .mbile li image {
-  width: 30px;
-  height: 30px;
+  width: 60rpx;
+  height: 60rpx;
 }
 
 .zbox .mbile li view:nth-child(3) {
-  font-size: 16px;
+  font-size: 32rpx;
   color: gray;
 }
 
 .zbox .mbile li:nth-child(1) {
-  border-right: 1px solid gray;
+  border-right: 2rpx solid rgba(128, 128, 128, 0.315);
 }
 
 .zbox .mbile li:nth-child(2) {
-  border-right: 1px solid gray;
+  border-right: 2rpx solid rgba(128, 128, 128, 0.315);
 }
 
 .zbox .shoucang {
   width: 100%;
+  height: 300rpx;
   display: flex;
   flex-direction: column;
-  margin-top: 10px;
+  margin-top: 20rpx;
 }
 
 .zbox .shoucang li {
   width: 100%;
-  height: 50px;
+  height: 100rpx;
   background-color: white;
-  line-height: 50px;
+  line-height: 100rpx;
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
 .zbox .shoucang li image {
-  width: 20px;
-  height: 20px;
-  margin-left: 15px;
-  margin-right: 15px;
+  width: 40rpx;
+  height: 40rpx;
+  margin-left: 30rpx;
+  margin-right: 30rpx;
 }
 
 .zbox .shoucang li p {
-  margin-left: -150px;
+  margin-left: -460rpx;
 }
 
 .zbox .shoucang li:nth-child(1) {
-  border-bottom: 1px solid gray;
+  border-bottom: 2rpx solid rgba(128, 128, 128, 0.288);
 }
 
 .zbox .shoucang li:nth-child(2) {
-  border-bottom: 1px solid gray;
+  border-bottom: 2rpx solid rgba(128, 128, 128, 0.288);
+}
+
+.zbox .shoucang li:nth-child(3) .youhui {
+  margin-left: -430rpx;
+}
+
+.zbox .xiaoxi {
+  width: 100%;
+  height: 200rpx;
+  display: flex;
+  flex-direction: column;
+  margin-top: 20rpx;
+}
+
+.zbox .xiaoxi li {
+  width: 100%;
+  height: 100rpx;
+  background-color: white;
+  line-height: 100rpx;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.zbox .xiaoxi li image {
+  width: 40rpx;
+  height: 40rpx;
+  margin-left: 30rpx;
+  margin-right: 30rpx;
+}
+
+.zbox .xiaoxi li p {
+  margin-left: -460rpx;
+}
+
+.zbox .xiaoxi li:nth-child(1) {
+  border-bottom: 2rpx solid rgba(128, 128, 128, 0.288);
 }
