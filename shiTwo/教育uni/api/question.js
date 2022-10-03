@@ -1,25 +1,55 @@
-import axios from '../until/http.js'
+import http from '@/common/js/request.js'
 
-// 热门问答
-const getHot = (obj) => {
-  let data = axios.post('question/api/question/hot',obj)
-  return data
+// 热门回答
+async function answer(obj) {
+	const {
+		data
+	} = await http.post('/question/api/question/hot', {
+		current: obj.page,
+		size: obj.pageSize
+	})
+	return data
 }
 
-// 最新问题
-const getNew = (obj) => {
-  let data = axios.post('question/api/question/new',obj)
-  return data
+async function challenge(obj) {
+	const {
+		data
+	} = await http.post('/question/api/question/new', {
+		current: obj.page,
+		size: obj.pageSize
+	})
+	return data
 }
 
-// 等待问题
-const getWiat = (obj) => {
-  let data = axios.post('question/api/question/wait',obj)
-  return data
+async function answers(obj) {
+	const {
+		data
+	} = await http.post('/question/api/question/wait', {
+		current: obj.page,
+		size: obj.pageSize
+	})
+	return data
+}
+
+// 问答详情
+async function ask(a,current,size) {
+ const {
+  data
+ } = await http.get(`question/api/question/${a}`)
+ return data
+}
+// 问答评论
+async function askcomment(id) {
+ const {
+  data
+ } = await http.get(`article/api/comment/list/${id}`)
+ return data
 }
 
 export {
-  getHot,
-  getNew,
-  getWiat
+	answer,
+	challenge,
+	answers,
+	ask,
+	askcomment
 }

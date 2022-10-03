@@ -1,85 +1,148 @@
 <template>
-	<view class="context">
-		<scroll-view class="left" scroll-y>
-		  <view :class="{'item':true, active:data.idx==index}" v-for="item,index in data.leftData" :key="index" @click="change(index)">
-		    {{item.name}}
-		  </view>
-		</scroll-view>
-    <view class="right">
-      <view class="item-item" v-for="item in data.labelData" :key="item">
-        {{item.name}}
-      </view>
-    </view>
+	<view>
+		<view class="header">
+			<text>分类</text>
+			<image src="../../static/images/search1.png" mode=""></image>
+		</view>
+		<view class="cate-box">
+			<scroll-view scroll-y="true" class="left" :show-scrollbar="false">
+				<view v-for="(item,index) in listData" :key="item.id" @click="selectItem(item, index)">
+					<view :class="{'left-item':true, 'active': Idx == index}">
+						{{ item.name }}
+					</view>
+				</view>
+			</scroll-view>
+
+
+			<view class="right">
+				<view class="right-box">
+					<view class="right-item" v-for="(child,index) in list" :key="index" @click="toContent(child.name,child.id)">
+						{{ child.name }}
+					</view>
+				</view>
+			</view>
+		</view>
 	</view>
 </template>
 
-<script setup>
-	import {getCate} from '../../api/category.js'
-	import { reactive } from 'vue'
-	const data = reactive({
-    leftData:[],
-    labelData:[],
-    idx:0
-  })
-  getCate().then(res => {
-    // console.log(res);
-    data.leftData = res.data.data
-    data.labelData = res.data.data[0].labelList
-  })
-  const change = (index) => {
-    data.labelData = data.leftData[index].labelList
-    data.idx = index
-  }
+<script>
+	import {
+		list
+	} from '../../api/index.js'
+	import {
+		ref,
+		reactive,
+		toRefs
+	} from 'vue'
+	import { useRouter } from 'vue-router'
+	export default {
+		setup() {
+			
+			const router = useRouter()
+			
+			const data = reactive({
+				listData: [],
+				list: [],
+				Idx: 0
+			})
+			// 分类
+			list().then(res => {
+				// console.log(res);
+				data.listData = res.data
+				data.list = res.data[0].labelList
+			})
+			// tab栏切换
+			const selectItem = (item,index) => {
+				data.Idx = index
+				data.list = item.labelList
+			}
+
+			const toContent = (name, id) => {
+				router.push(`/pages/content/content?name=${name}&id=${id}`)
+			}
+			
+			return {
+				...toRefs(data),
+				selectItem,
+				toContent
+			}
+		}
+	}
 </script>
 
 <style lang="scss">
-  .context {
-    display: flex;
-    // margin-bottom: 30rpx;
-    .left {
-      width: 25%;
-      height: calc(100vh - 96px);
-      background: #f8f9fb;
-      display: flex;
-      flex-wrap: wrap;
-      .item {
-        width: 100%;
-        height: 100rpx;
-        text-align: center;
-        line-height: 100rpx;
-        margin: 20px 0;
-        position: relative;
-      }
-    }
-    .right {
-      width: 75%;
-      display: flex;
-      justify-content: space-around;
-      align-content: flex-start;
-      flex-wrap: wrap;
-      .item-item {
-        width: 170rpx;
-        height: 70rpx;
-        line-height: 70rpx;
-        text-align: center;
-        box-sizing: border-box;
-        border: 1px solid grey;
-        margin: 20rpx 0;
-        font-size: 14px;
-        border-radius: 30rpx;
-      }
-    }
-  }
-  .active {
-    color: #345DC2;
-   }
-  .active::after {
-    content: " ";
-    width: 2px;
-    height: 15px;
-    background: #345DC2;
-    position: absolute;
-    top: 18px;
-    left: 0px;
-  }
+	.header {
+		height: 100rpx;
+		background-color: #345dc2;
+		color: white;
+		font-size: 35rpx;
+		line-height: 100rpx;
+		text-align: center;
+		font-weight: 600;
+		position: relative;
+
+		image {
+			position: absolute;
+			right: 10rpx;
+			top: 23rpx;
+			width: 55rpx;
+			height: 50rpx;
+		}
+	}
+
+	.active {
+		color: #345dc2 !important;
+	}
+
+	.active::before {
+		content: "";
+		position: absolute;
+		width: 6rpx;
+		height: 50rpx;
+		background-color: #345dc2;
+		left: 0;
+		top: 35%;
+	}
+
+	.cate-box {
+		width: 100%;
+		display: flex;
+
+		.left {
+			width: 26%;
+			text-align: center;
+			height: calc(100vh - 100rpx);
+			background-color: #f8f9fb;
+
+			.left-item {
+				height: 140rpx;
+				line-height: 140rpx;
+				font-size: 30rpx;
+				font-weight: 400;
+				position: relative;
+				color: #8c8c8c;
+			}
+		}
+
+		.right {
+			flex: 1;
+
+			.right-box {
+				width: 100%;
+				padding: 5% 1%;
+
+				.right-item {
+					display: inline-block;
+					width: 29%;
+					text-align: center;
+					height: 31px;
+					line-height: 31px;
+					border-radius: 30rpx;
+					border: 1px solid #bbb;
+					margin: 10rpx;
+					font-size: 23rpx;
+				}
+			}
+		}
+	}
 </style>

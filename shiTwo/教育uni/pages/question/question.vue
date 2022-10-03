@@ -1,98 +1,269 @@
 <template>
-  <view class="context">
-    <scroll-view class="top">
-      <view :class="{'item':true, active:data.idx==1}" @click="change(1)">
-        热门回答
-      </view>
-      <view :class="{'item':true, active:data.idx==2}" @click="change(2)">
-        最新问题
-      </view>
-      <view :class="{'item':true, active:data.idx==3}" @click="change(3)">
-        等待回答
-      </view>
-    </scroll-view>
-    <view class="bottom">
-      <!-- 热门问答 -->
-      <questionData v-if="data.idx==1" :data="data.hotData"></questionData>
-      <!-- 最新问题 -->
-      <questionData v-if="data.idx==2" :data="data.newData"></questionData>
-      <!-- 等待回答 -->
-      <questionData v-if="data.idx==3" :data="data.wiatData"></questionData>
-    </view>
-  </view>
+	<view class="content">
+		<view class="box">
+			<view class="header">
+				<!-- 搜索 -->
+				<searchCom></searchCom>
+			</view>
+			<!-- 分类 -->
+			<view class="cate-box">
+				<view :class="{'cate-item': true, 'active': name == 'hot'}" @click="selectItem('hot')">
+					热门回答
+				</view>
+				<view :class="{'cate-item': true, 'active': name == 'new'}" @click="selectItem('new')">
+					最新问题
+				</view>
+				<view :class="{'cate-item': true, 'active': name == 'wait'}" @click="selectItem('wait')">
+					等待回答
+				</view>
+			</view>
+		</view>
+
+		<!-- 内容 -->
+		<view class="ask-box">
+			<view class="ask-item" v-for="item in answerList" :key="item.id" @click="toDetails(item.id)">
+				<view class="fir-text">
+					{{ item.title }}
+				</view>
+				<view class="sec-text">
+					<view class="left">
+						{{ item.reply }}回答 · {{ item.viewCount }}浏览
+					</view>
+					<view class="right">
+						{{ item.nickName }}是 · {{ item.createDate }}
+					</view>
+				</view>
+			</view>
+		</view>
+		<image @click="scrolTop" class="scrollTop" v-show="flag" src="../../static/images/scrollTop.png" mode="">
+		</image>
+	</view>
 </template>
 
-<script setup>
-  import questionData from '../../components/question/questionData.vue'
-  import {getHot,getNew,getWiat} from '../../api/question.js'
-  import {reactive} from 'vue'
-  
-  const data = reactive({
-    // 热门
-    hotData:[],
-    // 最新
-    newData:[],
-    // 等待
-    wiatData:[],
-    // 切换标识
-    idx:1
-  })
-  const change = (index) => {
-    data.idx = index
-  }
-  
-  // 热门问答
-  getHot({current: 1, size: 10}).then(res => {
-    // console.log(res,'hot');
-    data.hotData = res.data.data.records
-  })
-  
-  // 最新问答
-  getNew({current: 1, size: 10}).then(res => {
-    // console.log(res,'new');
-    data.newData = res.data.data.records
-  })
-  
-  // 等待回答
-  getWiat({current: 1, size: 10}).then(res => {
-    // console.log(res,'wiat');
-    data.wiatData = res.data.data.records
-  })
+<script>
+	import {
+		answer,
+		challenge,
+		answers
+	} from '../../api/question.js'
+	import {
+		reactive,
+		toRefs
+	} from 'vue'
+	import {
+		onPageScroll,
+		onPullDownRefresh,
+		onReachBottom
+	} from '@dcloudio/uni-app'
+	export default {
+		setup() {
+			const data = reactive({
+				answerList: [],
+				page: 1,
+				pageSize: 10,
+				flag: false,
+				name: 'hot'
+			})
+
+			answer({
+				page: data.page,
+				pageSize: data.pageSize
+			}).then(res => {
+				data.answerList = res.data.records
+			})
+			// 选中
+			const selectItem = (val) => {
+				data.name = val
+				if(data.name == 'hot') {
+					answer({
+						page: data.page,
+						pageSize: data.pageSize
+					}).then(res => {
+						data.answerList = res.data.records
+					})
+				} else if(data.name == 'new') {
+					challenge({
+						page: data.page,
+						pageSize: data.pageSize
+					}).then(res => {
+						data.answerList = res.data.records
+					})
+				} else {
+					answers({
+						page: data.page,
+						pageSize: data.pageSize
+					}).then(res => {
+						data.answerList = res.data.records
+					})
+				}
+			}
+			// 监听滚动条
+			onPageScroll((e) => {
+				data.scrollTop = e.scrollTop
+				if (e.scrollTop >= 400) {
+					data.flag = true
+				} else {
+					data.flag = false
+				}
+			})
+
+			// 点击回到顶部
+			const scrolTop = () => {
+				uni.pageScrollTo({
+					scrollTop: 0
+				})
+			}
+
+			// 上拉刷新
+			onPullDownRefresh(() => {
+				data.page = 1
+				if(data.name == 'hot') {
+					answer({
+						page: data.page,
+						pageSize: data.pageSize
+					}).then(res => {
+						data.answerList = res.data.records
+					})
+				} else if(data.name == 'new') {
+					challenge({
+						page: data.page,
+						pageSize: data.pageSize
+					}).then(res => {
+						data.answerList = res.data.records
+					})
+				} else {
+					answers({
+						page: data.page,
+						pageSize: data.pageSize
+					}).then(res => {
+						data.answerList = res.data.records
+					})
+				}
+				// 停止下拉
+				uni.stopPullDownRefresh()
+			})
+
+			// 触底加载
+			onReachBottom(() => {
+				data.page++
+				if(data.name == 'hot') {
+					answer({
+						page: data.page,
+						pageSize: data.pageSize
+					}).then(res => {
+						data.answerList = [...data.answerList, ...res.data.records]
+					})
+				} else if(data.name == 'new') {
+					challenge({
+						page: data.page,
+						pageSize: data.pageSize
+					}).then(res => {
+						data.answerList = [...data.answerList, ...res.data.records]
+					})
+				} else {
+					answers({
+						page: data.page,
+						pageSize: data.pageSize
+					}).then(res => {
+						data.answerList = [...data.answerList, ...res.data.records]
+					})
+				}
+			})
+			
+			// 跳转详情
+			const toDetails = (id) => {
+				uni.navigateTo({
+					url: `/pages/question/details?id=${id}`
+				})
+			}
+
+			return {
+				...toRefs(data),
+				scrolTop,
+				selectItem,
+				toDetails
+			}
+		}
+	}
 </script>
 
 <style lang="scss">
-  .context {
-    .top {
-      width: 100%;
-      height: 80rpx;
-      background: white;
-      border-bottom: 1px solid #f1f1f1;
-      position: fixed;
-      top: 85rpx;
-      left: 0;
-      .item {
-        width: 33%;
-        height: 80rpx;
-        line-height: 80rpx;
-        text-align: center;
-        display: inline-block;
-        position: relative;
-      }
-    }
-    .bottom {
-      margin-top: 85rpx;
-    }
-  }
-  .active {
-    color: #345DC2;
-   }
-  .active::after {
-    content: " ";
-    width: 25px;
-    height: 2px;
-    background: #345DC2;
-    position: absolute;
-    bottom: 3px;
-    left: 50px;
-  }
+	.ask-box {
+		width: 100%;
+
+		.ask-item {
+			width: 100%;
+			border-bottom: 1px solid #eee;
+			padding: 3%;
+			box-sizing: border-box;
+
+			.fir-text {
+				font-weight: 700;
+				font-size: 35rpx;
+			}
+
+			.sec-text {
+				display: flex;
+				justify-content: space-between;
+				// margin: 2% 0;
+        margin-top: 20rpx;
+				color: gray;
+				font-size: 25rpx;
+			}
+		}
+	}
+
+	.box {
+		position: sticky;
+		left: 0;
+		top: 0;
+		z-index: 22;
+	}
+
+	.article-box {
+		width: 100%;
+
+	}
+
+	.cate-box {
+		width: 100%;
+		height: 80rpx;
+		border-bottom: 1px solid #e7e7e7;
+		display: flex;
+		justify-content: space-around;
+		align-items: center;
+		background-color: #fff;
+		border: none;
+
+		.cate-item {
+			height: 70rpx;
+			line-height: 70rpx;
+		}
+	}
+
+	.active {
+		border-bottom: 6rpx solid #077dff;
+		color: #077dff;
+	}
+
+	.header {
+		width: 100%;
+		padding: 15rpx;
+		background-color: #0072b7;
+		position: sticky;
+		top: 0;
+		z-index: 1;
+	}
+
+	.content {
+		position: relative;
+
+		.scrollTop {
+			position: fixed;
+			bottom: 15%;
+			width: 50px;
+			height: 50px;
+			right: 30rpx;
+		}
+	}
 </style>

@@ -162,7 +162,7 @@
 		flex-direction: row;
 		position: relative;
 		padding: 8px;
-		background-color: #ffffff;
+		background-color: #345dc2;
 	}
 
 	.uni-searchbar__box {
@@ -181,6 +181,7 @@
 		border-width: 0.5px;
 		border-style: solid;
 		border-color: #e5e5e5;
+		border-radius: 50px !important; 
 	}
 
 	.uni-searchbar__box-icon-search {
