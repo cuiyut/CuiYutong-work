@@ -1,0 +1,10 @@
+{
+  "navigationBarTitleText": "优购首选",
+  "navigationBarTextStyle": "white",
+  "navigationBarBackgroundColor": "#eb4450",
+  "usingComponents": {
+    "u-button": "../../uni_modules/vk-uview-ui/components/u-button/u-button",
+    "u-swiper": "../../uni_modules/vk-uview-ui/components/u-swiper/u-swiper",
+    "floor": "../../components/floor/floor"
+  }
+}

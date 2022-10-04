@@ -1,0 +1,11 @@
+<template>
+  <view class="car-wrapper">
+    购物车
+  </view>
+</template>
+
+<script>
+</script>
+
+<style>
+</style>
