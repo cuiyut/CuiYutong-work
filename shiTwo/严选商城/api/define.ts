@@ -1,50 +1,52 @@
-	/**轮播图数据接口*/
-	interface BannerItem {
-		image_src :string,
-		goods_id:number,
-		navigator_url:string,
-		open_type:string
-	}
-	//导航栏数组的接口
-	interface HomeCateListItme {
-		name:string,
-		image_src:string,
-		open_type?:string,
-		navigator_url?:string
-	}
-	
-	// 楼层数据接口
-	interface floorDataItem {
-		floor_title:FloorTitle,
-		product_list:ProductList
-	}
-	//楼层数据标题接口
-	interface FloorTitle{
-		image_src:string,
-		name:string
-	}
-	//楼层数据图片接口
-	interface ProductList{
-		image_src:string,
-		image_width:string,
-		name:string,
-		navigator_url:string,
-		open_type:string
-	}
-	//首页data数据
-	interface homeData {
-		bannerList:BannerItem[],
-		homeCateList:HomeCateListItme[],
-		floorData:floorDataItem[]
-	}
-  
-  // 分类
+//楼层
+// floor_title
+interface Floor_title {
+	name: string,
+	image_src: string
+}
+interface List1 {
+	image_src: string,
+	image_width: string,
+	name: string,
+	navigator_url: string,
+	open_type: string
+}
 
-	
-	
-	export {
-		BannerItem,
-		HomeCateListItme,
-		floorDataItem,
-		homeData
+interface Acc {}
+
+type FloorList = Array<
+	{
+		floor_title: Floor_title,
+		product_list: Array<
+			{
+				product_list: List1
+			}
+		>
 	}
+>
+type List = Array<{
+	list2: Array<{
+		goods_id: number,
+		image_src: string,
+		navigator_url: string,
+		open_type: string
+	}>
+}>
+
+type CatesList = Array<{
+	catesList1:Array<{
+		image_src:string,
+		name:string,
+		navigator_url:string,
+		open_type:string
+	}>
+}>
+
+export {
+	Floor_title,
+	List1,
+	FloorList,
+	List,
+	CatesList,
+	Acc
+}

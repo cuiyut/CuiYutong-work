@@ -1,85 +1,53 @@
 <template>
-	<!-- 顶部导航栏 -->
-	<view class="btn-box">
-		<u-button class="btn" @click="gosearch">搜索</u-button>
+	<search-btn></search-btn>
+	<view class="wrap">
+		<u-swiper  height="320" :list="data.list" name="image_src" mode="dot"></u-swiper>
 	</view>
-	<!-- banner -->
-	<view class="banner">
-		<u-swiper :list="data.bannerList" height="340" name="image_src"></u-swiper>
+	<view class="index_cate">
+		<image v-for="(item,index) in data.catesList" :key="index" :src="item.image_src" mode=""></image>
 	</view>
-	<!-- 中间导航栏数据 -->
-	<view class="catitems">
-		<view class="imgbox" v-for="item,index in data.homeCateList" :key="index">
-			<image class="img" :src="item.image_src" mode="widthFix"></image>
-		</view>
-	</view>
-	<!-- 楼层 -->
-	<view class="floorbox">
-		<view class="floor-item" v-for="item,index in data.floorData" :key="index">
-			<floor :data="item"></floor>
-		</view>
-	</view>
+	<floor :list="data.floorList"></floor>
 </template>
 
 <script lang="ts" setup>
-	import { getBanner ,getHomeCate ,getFloorData} from '@/api/api'
-	import floor from '@/components/floor/floor.vue'
-	import { reactive } from 'vue'
-	const data = reactive({
-		bannerList:[],
-		homeCateList:[],
-		floorData:[],
+	import {switchlist,nav1,floorList} from '../../api/api.js'
+	import {reactive} from 'vue'
+	import floor from '../../components/floor/floor.vue'
+	import * as TS from '../../api/define'
+	const data: {
+		list: TS.List;
+		catesList: TS.CatesList;
+		floorList: TS.FloorList
+	} = reactive({
+		list:[],
+		catesList:[],
+		floorList: [],
 	})
-	
-	const gosearch = ()=>{
-		uni.navigateTo({
-			url:'/pages/search/search'
-		})
-	}
-	//获取轮播图
-	getBanner().then((res:any)=>{
-		console.log(res);
-		data.bannerList = res.message
+	switchlist().then(res => {
+		data.list = res.message
+		// console.log(res.message,111);
 	})
-	// 获取首页导航栏数据
-	getHomeCate().then((res:any)=>{
-		data.homeCateList = res.message
+	nav1().then(res => {
+		data.catesList = res.message
+		// console.log(res.message,222);
 	})
-	getFloorData().then((res:any)=>{
-		data.floorData = res.message
+	floorList().then(res => {
+		// console.log(res.message);
+		data.floorList = res.message
+		// console.log(data.floorList,666666666);
 	})
 </script>
 
 <style lang="scss">
-.btn-box{
-	background-color: #eb4450;
-	padding: 10rpx;
-	height: 90rpx;
-  box-sizing: border-box;
-	.btn{
-		height: 70rpx;
-	}
-}
-.banner{
-	width: 100%;
-	height: 340rpx;
-}
-.catitems{
-	width: 100%;
-	display: flex;
-	justify-content: space-around;
-	padding: 20rpx 0;
-	.imgbox{
-		text-align: center;
-		flex: 1;
-		.img{
-			width: 148rpx;
+	.index_cate{
+		display: flex;
+		justify-content: space-around;
+		margin: 20rpx 0;
+		image{
+			width: 130rpx;
+			height: 140rpx;
 		}
 	}
-}
-.floorbox{
-	.floor-item{
-		margin: 20rpx 0;
-	}
-}
+	
+
 </style>
