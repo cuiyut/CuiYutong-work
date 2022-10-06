@@ -23,7 +23,7 @@
 		  </view>
 		</view>
 		
-		<uni-goods-nav class="footnav" :fill="true"  :options="options" :buttonGroup="buttonGroup" />
+		<uni-goods-nav class="footnav" :fill="true"  :options="options" :buttonGroup="buttonGroup" @buttonClick="buttonClick" />
 	</view>
 </template>
 
@@ -72,22 +72,34 @@
         	    ]
 			})
 			onLoad((option) => {
-				console.log(option.id);
+				// console.log(option.id);
 				data.id = option.id
 				detail(data.id).then(res => {
-					console.log(res.message);
+					// console.log(res.message);
 					data.img = res.message.pics
 					data.list = res.message
 				})
 			});
 			const handleCollect = () => {
-				console.log(1);
+				// console.log(1);
 				data.isCollect = !data.isCollect
 			}
+      // const onClick = (e) => {
+      //   uni.showToast({
+      // 	  title: `点击${e.content.text}`,
+      // 	  icon: 'none'
+      // 	})
+      // }
+      const	buttonClick = (e) => {
+      	console.log(e)
+        console.log(e.index);
+      }
 
 			return {
 				...toRefs(data),
-				handleCollect
+				handleCollect,
+        // onClick,
+        buttonClick
 			}
 		}
 	}

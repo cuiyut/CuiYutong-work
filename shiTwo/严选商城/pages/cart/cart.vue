@@ -14,31 +14,58 @@
     </view>
     <view class="bottom">
       <view class="fubox">
-        <u-checkbox></u-checkbox>
+        <u-checkbox v-model="checked" ></u-checkbox>
       </view>
       <view class="imgs">
-        <img src="../../static/logo.png" alt="">
+        <img class="imgss" src="../../static/logo.png" alt="">
       </view>
       <view class="detail">
         <view class="desc">
-          撒都会i减哦卡度过his价哦看到你还i加我看佩奇和我进去哦我看
+          撒都会i减哦卡度过his价哦看到你还i加我看佩奇和我进去哦我看sdjfghjkslaksjdhbjshkalmnsbjdhkamsndjbnksml
         </view>
         <view class="bottomm">
           <view class="price">
             ￥1899
           </view>
           <view class="num">
-            <u-button class="btn">-</u-button>
-            <span>12</span>
-            <u-button class="btn">+</u-button>
+            <u-number-box v-model="value"></u-number-box>
           </view>
+        </view>
+      </view>
+    </view>
+    <view class="dibu">
+      <view class="left">
+        <u-checkbox v-model="checkedAll" ></u-checkbox>
+        <span>全选</span>
+      </view>
+      <view class="right">
+        <view class="leftt">
+          <p>合计:<span class="spann">￥1899</span></p>
+          <p>包含运费</p>
+        </view>
+        <view class="rightt">
+          结算(1)
         </view>
       </view>
     </view>
   </view>
 </template>
 
-<script>
+<script lang="ts">
+  import {reactive,toRefs} from 'vue'
+  
+  export default {
+    setup() {
+      const data = reactive({
+        value:0,
+        checked:false,
+        checkedAll:false
+      })
+      return {
+        ...toRefs(data)
+      }
+    }
+  }
 </script>
 
 <style lang="scss">
@@ -59,6 +86,7 @@
       box-sizing: border-box;
     }
     .bottom {
+      border-bottom: 2rpx solid darkgray;
       width: 100%;
       display: flex;
       height: 200rpx;
@@ -70,13 +98,20 @@
       }
       .imgs {
         width: 30%;
-        img {
+        .imgss {
           width: 85%;
           height: 140rpx;
         }
       }
       .detail {
         width: 60%;
+        .desc {
+          overflow:hidden;
+          text-overflow:ellipsis;         
+          display:-webkit-box;       
+          -webkit-line-clamp:2;     
+          -webkit-box-orient:vertical;
+        }
       }
       .bottomm {
         margin-top: 20rpx;
@@ -99,6 +134,52 @@
             box-sizing: border-box;
             height: 50rpx;
           }
+        }
+      }
+    }
+    .dibu {
+      width: 100%;
+      height: 110rpx;
+      position: fixed;
+      bottom:100rpx;
+      display: flex;
+      border-top: 2rpx solid darkgrey;
+      justify-content: space-between;
+      align-items: center;
+      .left {
+        display: flex;
+        height: 100%;
+        width: 20%;
+        align-items: center;
+        box-sizing: border-box;
+        justify-content: center;
+        font-size: 14px;
+        padding-left: 20rpx;
+      }
+      .right {
+        width: 60%;
+        display: flex;
+        height: 100%;
+        justify-content: end;
+        .leftt {
+          height: 100%;
+          line-height: 50rpx;
+          font-size: 14px;
+          box-sizing: border-box;
+          padding-right: 10rpx;
+          text-align: right;
+          .spann {
+            color: #eb4450;
+          }
+        }
+        .rightt {
+          width: 50%;
+          height: 100%;
+          background: #eb4450;
+          text-align: center;
+          color: white;
+          font-size: 18px;
+          line-height: 100rpx;
         }
       }
     }
