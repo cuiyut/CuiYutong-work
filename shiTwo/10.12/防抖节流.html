@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 防抖
+        /**
+        **@param{fn: function} 需要防抖执行的函数
+        **@param{delay: number} 延迟时间
+        */
+        const debounce = (fn, delay = 500) => {
+            // 存储定时器的timerId
+            let timer = null
+            return function(...args) {
+                // 在每一次调用函数时，都清除上一次的定时器
+                if (timer) clearTimeout(timer)
+                // 开启一个定时器
+                timer = setTimeout(() => {
+                    fn.apply(this, args)
+                }, delay)
+            }
+        }
+
+
+
+
+        // 节流
+        /**
+        **@param{fn: function} 需要节流的函数
+        **@param{interval: number} 函数触发的频率
+        */
+        const throttle = (fn, interval) => {
+            // 记录上一次触发函数时的时间，初始值为0
+            let lastTime  = 0
+            return function (...args) {
+                // 获取现在的时间
+                const nowTime = new Date().getTime()
+                // 如果现在的时间减去上次触发的事件大于等于interval，则可以执行函数了
+                if(nowTime - lastTime >= interval){
+                    fn.apply(this, args)
+                    // 将上次触发函数的时间赋值成当前时间
+                    lastTime = nowTimes
+                }
+            }
+        }
+    </script>
+</body>
+</html>
